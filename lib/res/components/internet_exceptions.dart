@@ -3,16 +3,17 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:getx_mvvm/res/colors/app_color.dart';
 import 'package:getx_mvvm/res/components/round_button.dart';
 
-class internetExceptionWidget extends StatefulWidget {
+// ignore: camel_case_types
+class InternetExceptionWidget extends StatefulWidget {
   final VoidCallback onPress;
-  const internetExceptionWidget({super.key, required this.onPress});
+  const InternetExceptionWidget({super.key, required this.onPress});
 
   @override
-  State<internetExceptionWidget> createState() =>
-      _internetExceptionWidgetState();
+  State<InternetExceptionWidget> createState() =>
+      _InternetExceptionWidgetState();
 }
 
-class _internetExceptionWidgetState extends State<internetExceptionWidget> {
+class _InternetExceptionWidgetState extends State<InternetExceptionWidget> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:getx_mvvm/data/network/base_api_services.dart';
 
@@ -37,15 +36,17 @@ class NetworkApiServices extends BaseApiServices {
 
     dynamic responseJSon;
     try {
-      final response =
-          await http.post(Uri.parse(url),
-          body: jsonEncode(data)
-          ).timeout(Duration(seconds: 10));
+      final response = await http
+          .post(Uri.parse(url), body: data)
+          .timeout(Duration(seconds: 10));
       responseJSon = returnResponse(response);
     } on SocketException {
       throw InternetException('');
     } on RequestTimeOut {
       throw RequestTimeOut('');
+    }
+    if (kDebugMode) {
+      print(responseJSon);
     }
     return responseJSon;
   }
@@ -56,9 +57,8 @@ class NetworkApiServices extends BaseApiServices {
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
-        throw FetchDataException(
-            'Error occured while communicationwith server ' +
-                response.statusCode.toString());
+        throw FetchDataException('''Error occured while communicationwith server
+                ${response.statusCode.toString()}''');
     }
   }
 }

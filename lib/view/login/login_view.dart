@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:getx_mvvm/res/colors/app_color.dart';
 import 'package:getx_mvvm/res/components/round_button.dart';
 import 'package:getx_mvvm/utils/utils.dart';
-import 'package:getx_mvvm/view_models/controller/login_view_model.dart';
+import 'package:getx_mvvm/view_models/controller/login/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -75,13 +75,17 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(
               height: 40,
             ),
-            RoundButton(
-              title: 'Login',
-              onPress: () {
-                if (_formKey.currentState!.validate()) ;
-              },
-              width: 200,
-            )
+            Obx(() => RoundButton(
+                  title: 'Login',
+                  loading: loginVM.loading.value,
+                  onPress: () {
+                    if (_formKey.currentState!.validate()) {
+                      loginVM.loginApi();
+                    }
+                    ;
+                  },
+                  width: 200,
+                ))
           ],
         ),
       ),
